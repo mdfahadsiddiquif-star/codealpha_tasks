@@ -1,0 +1,24 @@
+{% extends 'store/base.html' %}
+
+{% block title %}My Orders - Simple Store{% endblock %}
+
+{% block content %}
+<h1>My Orders</h1>
+
+{% if orders %}
+    {% for order in orders %}
+        <div class="order-card">
+            <h3>Order #{{ order.id }} &mdash; {{ order.status }}</h3>
+            <p>{{ order.created_at|date:"M d, Y H:i" }}</p>
+            <ul>
+                {% for item in order.items.all %}
+                    <li>{{ item.quantity }} x {{ item.product_name }} &mdash; ${{ item.subtotal }}</li>
+                {% endfor %}
+            </ul>
+            <p class="total">Total: ${{ order.total_price }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>You haven't placed any orders yet.</p>
+{% endif %}
+{% endblock %}

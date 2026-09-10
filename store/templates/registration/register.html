@@ -1,0 +1,15 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Register - Simple Store{% endblock %}
+
+{% block content %}
+<div class="auth-form">
+    <h1>Create an Account</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+</div>
+{% endblock %}

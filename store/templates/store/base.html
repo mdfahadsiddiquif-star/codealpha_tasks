@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Simple Store{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+</head>
+<body>
+    <header class="navbar">
+        <a href="{% url 'product_list' %}" class="logo">Simple&nbsp;Store</a>
+        <form class="search-form" action="{% url 'product_list' %}" method="get">
+            <input type="text" name="q" placeholder="Search products..." value="{{ query|default:'' }}">
+            <button type="submit">Search</button>
+        </form>
+        <nav class="nav-links">
+            <a href="{% url 'cart_detail' %}">Cart{% if cart_item_count %} ({{ cart_item_count }}){% endif %}</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'order_history' %}">My Orders</a>
+                <span class="nav-user">Hi, {{ user.username }}</span>
+                <form action="{% url 'logout' %}" method="post" class="inline-form">
+                    {% csrf_token %}
+                    <button type="submit" class="link-button">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="container">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="message {{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>Simple Store &mdash; demo e-commerce app built with Django.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Order Confirmed - Simple Store{% endblock %}
+
+{% block content %}
+<div class="order-success">
+    <h1>Thank you, {{ order.full_name }}!</h1>
+    <p>Your order <strong>#{{ order.id }}</strong> has been placed and is <strong>{{ order.status }}</strong>.</p>
+
+    <h3>Shipping to</h3>
+    <p>{{ order.address }}, {{ order.city }}, {{ order.postal_code }}</p>
+
+    <h3>Order Items</h3>
+    <ul>
+        {% for item in order.items.all %}
+            <li>{{ item.quantity }} x {{ item.product_name }} &mdash; ${{ item.subtotal }}</li>
+        {% endfor %}
+    </ul>
+    <p class="total">Total: ${{ order.total_price }}</p>
+
+    <a href="{% url 'product_list' %}" class="btn btn-primary">Continue Shopping</a>
+</div>
+{% endblock %}
