@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Simple Store — Django E-commerce Demo
 
 A basic e-commerce site built with **Django** (backend) and plain **HTML/CSS**
@@ -104,3 +105,6 @@ Then visit:
 - Add an "edit profile" / address book so checkout can pre-fill
 - Switch `DATABASES` to Postgres for production, and set a real `SECRET_KEY`
   + `DEBUG = False` + proper `ALLOWED_HOSTS` before deploying
+=======
+# codealpha_tasks
+>>>>>>> 1e74721676aa939ffbd8a3b89e4d8fbfc85a6e32
